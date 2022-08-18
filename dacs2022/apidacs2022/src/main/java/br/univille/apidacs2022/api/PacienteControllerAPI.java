@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.univille.apidacs2022.service.PacienteService;
@@ -29,8 +30,11 @@ public class PacienteControllerAPI {
     }
 
     public ResponseEntity<Paciente> insertPaciente(@RequestBody Paciente paciente) {
-        service.save(paciente);
-        return new ResponseEntity<Paciente>(paciente, HttpStatus.CREATED);
+            if(paciente.getId() ==  0){
+                service.save(paciente);
+                return new ResponseEntity<Paciente>(paciente, HttpStatus.CREATED);
+            }
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping(value="/nome/{nome}")
@@ -38,12 +42,46 @@ public class PacienteControllerAPI {
         var listaPacientes = service.getByName(nome);
         return new ResponseEntity<List<Paciente>>(listaPacientes,HttpStatus.OK);
     }
-    
-    @GetMapping()
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Paciente>update(@PathVariable("id") long id, @RequestBody Paciente paciente){
+       var pacienteAntigo = service.findById(id);
+       if(pacienteAntigo == null){
+        return ResponseEntity.notFound().build();
+       }
+
+       pacienteAntigo.setNome(paciente.getNome());
+       pacienteAntigo.setSexo(paciente.getSexo());
+       pacienteAntigo.setDataNascimento(paciente.getDataNascimento());
+       pacienteAntigo.setCidade(paciente.getCidade());
+       pacienteAntigo.setListaPlanos(paciente.getListaPlanos());
+        
+       service.save(pacienteAntigo);
+       return new ResponseEntity<Paciente>(pacienteAntigo,HttpStatus.OK);
+    }
+
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Paciente>
+        delete(@PathVariable("id") long id){
+
+            var pacienteAntigo = service.findById(id);
+            if(pacienteAntigo == null){
+                return ResponseEntity.notFound().build();
+            }
+            service.delete(pacienteAntigo.getId());
+
+            return new ResponseEntity<Paciente>(pacienteAntigo,HttpStatus.OK);
+        }
+
+
+    /*  @GetMapping()
     public ResponseEntity <List<Paciente>> getByNome2(@RequestParam("nome")String nome) {
         var listaPacientes = service.getByName(nome);
         return new ResponseEntity<List<Paciente>>(listaPacientes,HttpStatus.OK);
     }
-    
+     */
+  
 
 }
