@@ -2,6 +2,15 @@ GET http://localhost:8081/api/v1/pacientes
 
 
 ###
+GET http://localhost:8081/api/v1/pacientes/nome/ze
+
+
+###
+GET http://localhost:8081/api/v1/pacientes/?nome=ze
+
+
+###
+
 
 
 POST http://localhost:8081/api/v1/pacientes
