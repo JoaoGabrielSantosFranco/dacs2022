@@ -4,50 +4,28 @@ GET http://localhost:8081/api/v1/pacientes
 ###
 GET http://localhost:8081/api/v1/pacientes/nome/ze
 
-
 ###
-GET http://localhost:8081/api/v1/pacientes/?nome=ze
+GET http://localhost:8081/api/v1/pacientes/33
 
 
 ###
 POST http://localhost:8081/api/v1/pacientes
-content-Type: /application/json 
-
+content-Type: application/json 
 {
     "nome": "Zezinho",
     "sexo": "Masculino",
-    "dataNascimento":"2022-08-17T00:00:00",
+    "dataNascimento":"2022-08-17T00:00:00"
 }
 
-###
-
-POST http://localhost:8081/api/v1/pacientes
-content-Type: /application/json 
-
-{
-    "nome": "Marizinha",
-    "sexo": "Feminino",
-    "dataNascimento":"2022-08-16T00:00:00",
-}
-###
-POST http://localhost:8081/api/v1/pacientes
-content-Type: /application/json 
-
-{
-    "id" : 1,
-    "nome": "Marizinha",
-    "sexo": "Feminino",
-    "dataNascimento":"2022-08-16T00:00:00",
-}
 ###
 
 PUT http://localhost:8081/api/v1/pacientes/1
-content-Type: /application/json 
+content-Type: application/json 
 
 {
     "nome": "Zezinho da silva",
     "sexo": "Masculino",
-    "dataNascimento":"2022-08-17T00:00:00",
+    "dataNascimento":"2022-08-17T00:00:00"
 }
 ###
 
