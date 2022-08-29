@@ -10,51 +10,45 @@ import br.univille.apidacs2022.service.PacienteService;
 import br.univille.coredacs2022.entity.Paciente;
 import br.univille.coredacs2022.repository.PacienteRepository;
 
+
 @Service
 public class PacienteServiceImpl 
     implements PacienteService{
-        @Autowired
-        private PacienteRepository repository;
-
-        @Override
-        public List<Paciente> getAll(){
-            return repository.findAll();
-        }
-
-        @Override
-        public Paciente save(Paciente paciente){
-            repository.save(paciente);
-            return paciente;
-        }
-
-        @Override
-        public Paciente delete(long id) {
-            Optional<Paciente> paciente = repository.findById(id);
-            if(paciente.isPresent()){
-                var pac = paciente.get();
-                repository.deleteById(id);
-
-                return pac;
-            }
-            return null;
-        }
-
-        @Override 
-        public List<Paciente> getByName(String nome){
-            return repository.findByNomeIgnoreCaseContaining(nome);
-        }
-
-        @Override
-        public Paciente findById(long id) {
-            Optional<Paciente> paciente = repository.findById(id);
-            if(paciente.isPresent()){
-                return paciente.get();
-            }
-            return null;
-        }
-
-
-
-
+    
+    @Autowired
+    private PacienteRepository repository;
+    @Override
+    public List<Paciente> getAll() {
+        return repository.findAll();
+    }
+    @Override
+    public Paciente save(Paciente paciente) {
+        repository.save(paciente);
+        return paciente;
     }
 
+    @Override
+    public Paciente findById(long id) {
+        Optional<Paciente> paciente = repository.findById(id);
+        if(paciente.isPresent()){
+            return paciente.get();
+        }
+        return null;
+    }
+
+    @Override
+    public Paciente delete(long id) {
+        Optional<Paciente> paciente = repository.findById(id);
+        if(paciente.isPresent()){
+            var pac = paciente.get();
+            repository.delete(pac);
+            return pac;
+        }
+        return null;
+    }
+    @Override
+    public List<Paciente> getByName(String nome) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+}
