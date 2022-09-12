@@ -15,4 +15,3 @@ public interface ProcedimentoService {
 
     public ProcedimentoDTO getById(long id);
 }
-
