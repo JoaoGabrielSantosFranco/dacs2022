@@ -18,7 +18,7 @@ import br.univille.apidacs2022.service.ProcedimentoService;
 import br.univille.coredacs2022.entity.Procedimento;
 
 @Controller
-@RequestMapping("api/v1/procedimentos")
+@RequestMapping("/api/v1/procedimentos")
 public class ProcedimentoControllerAPI {
 
     @Autowired
