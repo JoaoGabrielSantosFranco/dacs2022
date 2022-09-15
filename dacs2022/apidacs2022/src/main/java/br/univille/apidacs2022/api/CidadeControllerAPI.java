@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.univille.apidacs2022.service.CidadeService;
 import br.univille.coredacs2022.entity.Cidade;
-import io.swagger.models.Response;
 
 @RestController
 @RequestMapping("/api/v1/cidades")

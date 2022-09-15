@@ -11,4 +11,5 @@ public class Apidacs2022Application {
 		SpringApplication.run(Apidacs2022Application.class, args);
 	}
 
+	
 }
