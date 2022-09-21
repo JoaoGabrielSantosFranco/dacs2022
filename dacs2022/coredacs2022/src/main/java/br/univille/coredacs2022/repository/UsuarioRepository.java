@@ -9,11 +9,7 @@ import br.univille.coredacs2022.entity.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-
     Optional<Usuario> findByUsuario(String usuario);
-    
-    Optional<Usuario> findByAndSenha(String usuario,String senha);
-    
-    
 
+    Optional<Usuario> findByUsuarioAndSenha(String usuario, String senha);
 }
