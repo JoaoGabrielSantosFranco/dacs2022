@@ -1,50 +1,79 @@
-GET http://localhost:8081/api/v1/pacientes
-
-### GET http://localhost:8081/api/v1/pacientes/1
-
-### GET http://localhost:8081/api/v1/pacientes/nome/zinha
-
-### GET http://localhost:8081/api/v1/pacientes/?nome=ze
-
-###
-
-POST http://localhost:8081/api/v1/pacientes content-type: application/json
+# @name loginAPI
+POST http://localhost:8081/api/v1/auth/signin 
+content-type: application/json
 
 {
-"nome": "Zezinho", "sexo": "Masculino", "dataNascimento": "2022-08-17T00:00:00"
+"usuario": "admin", "senha": "admin"
+}
+
+###
+@token = {{loginAPI.response.body.*}}
+
+###
+GET http://localhost:8081/api/v1/pacientes/
+Authorization: Bearer {{token}}
+###
+GET http://localhost:8081/api/v1/pacientes/1
+Authorization: Bearer {{token}}
+###
+GET http://localhost:8081/api/v1/pacientes/nome/zinha
+Authorization: Bearer {{token}}
+###
+GET http://localhost:8081/api/v1/pacientes/?nome=ze
+Authorization: Bearer {{token}}
+###
+
+POST http://localhost:8081/api/v1/pacientes
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "nome": "Zezinho",
+    "sexo": "Masculino",
+    "dataNascimento": "2022-08-17T00:00:00"
 }
 
 ###
 
-POST http://localhost:8081/api/v1/pacientes content-type: application/json
+POST http://localhost:8081/api/v1/pacientes
+content-type: application/json
+Authorization: Bearer {{token}}
 
 {
-"id" : 1, "nome": "Zezinho", "sexo": "Masculino", "dataNascimento": "2022-08-17T00:00:00"
+    "id" : 1,
+    "nome": "Zezinho",
+    "sexo": "Masculino",
+    "dataNascimento": "2022-08-17T00:00:00"
 }
 
 ###
 
-POST http://localhost:8081/api/v1/pacientes content-type: application/json
+POST http://localhost:8081/api/v1/pacientes
+content-type: application/json
+Authorization: Bearer {{token}}
 
 {
-"nome": "Mariazinha", "sexo": "Feminino", "dataNascimento": "2022-08-16T00:00:00"
+    "nome": "Mariazinha",
+    "sexo": "Feminino",
+    "dataNascimento": "2022-08-16T00:00:00"
 }
+
 
 ###
 
-PUT http://localhost:8081/api/v1/pacientes/1 content-type: application/json
+PUT http://localhost:8081/api/v1/pacientes/1
+content-type: application/json
+Authorization: Bearer {{token}}
 
 {
-"nome": "Zezinho da Silva Sauro", "sexo": "Masculino", "dataNascimento": "2022-08-17T00:00:00"
+    "nome": "Zezinho da Silva Sauro",
+    "sexo": "Masculino",
+    "dataNascimento": "2022-08-17T00:00:00"
 }
 
 ###
 
 DELETE http://localhost:8081/api/v1/pacientes/33
+Authorization: Bearer {{token}}
 
-
-POST http://localhost:8081/api/v1/auth/signin content-type: application/json
-
-{
-"usuario": "admin", "senha": "admin"
-}
+###

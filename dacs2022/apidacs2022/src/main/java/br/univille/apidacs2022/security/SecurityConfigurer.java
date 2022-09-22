@@ -1,6 +1,8 @@
 
 package br.univille.apidacs2022.security;
 
+import org.aspectj.apache.bcel.classfile.Module.Provide;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -11,11 +13,17 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @EnableWebSecurity
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 
-    /*Usar este codigo enquanto nao concluir JWT */
+    @Autowired
+    private JWTRequestFilter jwtRequestFilter;
+
+    /* Usar este codigo enquanto nao concluir JWT */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-            .authorizeRequests().antMatchers("/swagger-ui.html","/v2/api-docs/**","/swagger-resources/**","/api/**").permitAll();
-         
+                .authorizeRequests().antMatchers("/swagger-ui.html", "/v2/api-docs/**", "/swagger-resources/**")
+                .permitAll().antMatchers("/api/**").authenticated().and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 }
