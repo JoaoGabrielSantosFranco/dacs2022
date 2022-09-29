@@ -1,15 +1,9 @@
 package br.univille.apidacs2022;
 
-
-
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,11 +16,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.fasterxml.jackson.core.JsonpCharacterEscapes;
-
 import br.univille.apidacs2022.api.CidadeControllerAPI;
+import br.univille.apidacs2022.api.ConsultaControllerAPI;
 import br.univille.apidacs2022.api.MedicoControllerAPI;
 import br.univille.apidacs2022.api.PacienteControllerAPI;
+import br.univille.apidacs2022.api.PlanoDeSaudeControllerAPI;
+import br.univille.apidacs2022.api.ProcedimentoControllerAPI;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -42,6 +37,16 @@ class Apidacs2022ApplicationTests {
 	private MedicoControllerAPI medicoControllerAPI;
 
 	@Autowired
+	private PlanoDeSaudeControllerAPI planoDeSaudeControllerAPI;
+
+	@Autowired
+	private ConsultaControllerAPI consultaControllerAPI;
+	
+	@Autowired
+	private ProcedimentoControllerAPI procedimentoControllerAPI;
+	
+
+	@Autowired
 	private MockMvc mockMvc;
 
 	@Test
@@ -49,7 +54,9 @@ class Apidacs2022ApplicationTests {
 		assertThat(pacienteControllerAPI).isNotNull();
 		assertThat(medicoControllerAPI).isNotNull();
 		assertThat(cidadeControllerAPI).isNotNull();
-
+		assertThat(planoDeSaudeControllerAPI).isNotNull();
+		assertThat(consultaControllerAPI).isNotNull();
+		assertThat(procedimentoControllerAPI).isNotNull();
 	}
 
 	@Test
@@ -80,8 +87,6 @@ class Apidacs2022ApplicationTests {
 	}
 
 
-	@Autowired
-	private CidadeControllerAPI CidadeControllerAPI;
 	@Test
 	void CidadeControllerAPIGETTest() throws Exception{
 		MvcResult resultAuth = 
