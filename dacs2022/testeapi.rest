@@ -61,7 +61,7 @@ Authorization: Bearer {{token}}
 
 ###
 
-PUT http://localhost:8081/api/v1/pacientes/1
+PUT http://localhost:8081/api/v1/pacientes/66
 content-type: application/json
 Authorization: Bearer {{token}}
 
@@ -77,3 +77,119 @@ DELETE http://localhost:8081/api/v1/pacientes/33
 Authorization: Bearer {{token}}
 
 ###
+
+
+
+
+###CIDADE
+
+
+GET http://localhost:8081/api/v1/cidades/
+Authorization: Bearer {{token}}
+
+###
+
+GET  http://localhost:8081/api/v1/cidades/1
+Authorization: Bearer {{token}}
+content-type: application/json
+
+
+
+##Consultas 
+###
+
+GET http://localhost:8081/api/v1/consultas/
+Authorization: Bearer {{token}}
+
+###
+POST http://localhost:8081/api/v1/consultas/
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "data":  "2022-08-17T00:00:00",
+    "status": "Masculino",
+    "paciente":"Zezinho da Silva Sauro",
+    "medicoResponsavel":"Maikolll"
+}
+### 
+PUT http://localhost:8081/api/v1/consultas/
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "data":  "2022-08-17T00:00:00",
+    "status": "Masculino",
+    "paciente":"Zezinho da Silva Sauro"
+}
+
+
+
+###Medico
+
+###
+GET http://localhost:8081/api/v1/medicos/
+Authorization: Bearer {{token}}
+###
+GET http://localhost:8081/api/v1/medicos/68
+Authorization: Bearer {{token}}
+###
+POST http://localhost:8081/api/v1/medicos
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "crm": "123456",
+    "nome":"Zezinho da Silva Sauro"
+}
+###
+DELETE http://localhost:8081/api/v1/medicos/34
+Authorization: Bearer {{token}}
+
+###
+
+GET http://localhost:8081/api/v1/medicos/nome/Zezinho da Silva Sauro
+Authorization: Bearer {{token}}
+###
+PUT http://localhost:8081/api/v1/medicos/67
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "crm": "123456",
+    "nome":"Zezinho da Silva"
+
+}
+
+###
+
+
+GET http://localhost:8081/api/v1/consultas/
+Authorization: Bearer {{token}}
+
+###
+
+
+POST http://localhost:8081/api/v1/consultas
+content-type: application/json
+Authorization: Bearer {{token}}
+{
+   "data":  "2022-08-17T00:00:00",
+    "status": "",
+    "paciente":{
+        "id": 34
+    },
+       "MedicoResponsavel":{
+        "id": 97 
+    },
+    "listaProcedimentos": []
+}
+
+
+
+###
+GET  http://localhost:8081/api/v1/planosDeSaude
+content-type: application/json
+Authorization: Bearer {{token}}
+
+
