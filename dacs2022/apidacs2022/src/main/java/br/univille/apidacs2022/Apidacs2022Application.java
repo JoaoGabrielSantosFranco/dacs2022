@@ -10,6 +10,4 @@ public class Apidacs2022Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Apidacs2022Application.class, args);
 	}
-
-	
 }
